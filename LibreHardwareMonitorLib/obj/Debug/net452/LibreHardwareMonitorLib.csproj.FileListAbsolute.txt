@@ -1,0 +1,9 @@
+C:\Users\tmurb\source\repos\SmartFanControl\bin\Debug\net452\LibreHardwareMonitorLib.dll
+C:\Users\tmurb\source\repos\SmartFanControl\bin\Debug\net452\LibreHardwareMonitorLib.pdb
+C:\Users\tmurb\source\repos\SmartFanControl\LibreHardwareMonitorLib\obj\Debug\net452\LibreHardwareMonitorLib.csprojAssemblyReference.cache
+C:\Users\tmurb\source\repos\SmartFanControl\LibreHardwareMonitorLib\obj\Debug\net452\LibreHardwareMonitorLib.AssemblyInfoInputs.cache
+C:\Users\tmurb\source\repos\SmartFanControl\LibreHardwareMonitorLib\obj\Debug\net452\LibreHardwareMonitorLib.AssemblyInfo.cs
+C:\Users\tmurb\source\repos\SmartFanControl\LibreHardwareMonitorLib\obj\Debug\net452\LibreHardwareMonitorLib.csproj.CoreCompileInputs.cache
+C:\Users\tmurb\source\repos\SmartFanControl\LibreHardwareMonitorLib\obj\Debug\net452\LibreHardwareMonitorLib.csproj.CopyComplete
+C:\Users\tmurb\source\repos\SmartFanControl\LibreHardwareMonitorLib\obj\Debug\net452\LibreHardwareMonitorLib.dll
+C:\Users\tmurb\source\repos\SmartFanControl\LibreHardwareMonitorLib\obj\Debug\net452\LibreHardwareMonitorLib.pdb
