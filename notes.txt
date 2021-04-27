@@ -1,0 +1,29 @@
+Controller = Software
+Plant = PC
+Sensors = Temp sensors
+Actuators = Fan speed
+
+Using PID controller:
+Set point = target temperature
+Error = current temperature - target temperature
+Proportional output = Kp * Error
+Integral output = previous integral output + Ki * Error
+Differential output = Kd * (Error - previous Error)
+
+Fan speed output = proportional output + integral output + differential output
+
+
+However there are 2 problems:
+1) At load, the controller may attempt to increase the fan speed continually to no effect (at some point fan speed maxes its effectiveness)
+  - Differential term goes to 0 but integral term keeps increasing
+2) At idle, the controller may attempt to decrease the fan speed continually (which eventually means the temperature increases)
+  - This may not matter because once the temperature increases the differential term kicks back in and brings the fan speed back up
+
+Proposed solution:
+The target temperature is itself a controller
+- Inputs: output fan speed, current temperature
+- Analyzes: increasing fan speed compared to temperature over time
+- Computes: new target temperature based on whether the output fan speed is causing a change
+Desired effect: target temperature slowly moves towards stable temperature
+  - Differential output moves to counteract inflated integral output
+  - Integral output moves to constant (as Error -> 0)
