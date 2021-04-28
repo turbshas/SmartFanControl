@@ -1,2 +1,23 @@
 {
+    "DeviceConfigs": {
+        "test_config": {
+            "Id": "test_config",
+            "HardwareId": "/lpc/nct6795d/fancontrol/0",
+            "Type": "Fan",
+            "TemperatureSensorId": "test_temp_sensor_config",
+            "TargetTemperature": 50.0,
+            "MinFanSpeedPercent": 20,
+            "MaxFanSpeedPercent": 60,
+            "FanSpeedStepDelay": "00:00:00.500",
+            "FanSpeedStepAmount": 2,
+            "Sensitivity": 1.0
+        },
+        "test_temp_sensor_config": {
+            "Id": "test_temp_sensor_config",
+            "HardwareId": "/amdcpu/0/temperature/2",
+            "Type": "TemperatureSensor",
+            "TargetTemp": 50.0,
+            "PollingRate": "00:00:00.500"
+        }
+    }
 }

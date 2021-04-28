@@ -72,6 +72,7 @@ namespace SmartFanControl.Devices
 
             int fanPercentChange = _config.FanSpeedStepAmount * requiredFanSteps;
             _currentFanPercent += isPositiveChange ? fanPercentChange : -fanPercentChange;
+            Console.WriteLine($"Current temperature is: {currentTemp}, setting fan speed to: {_currentFanPercent}");
             SetFanSpeed(_currentFanPercent);
         }
 

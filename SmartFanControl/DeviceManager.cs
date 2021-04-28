@@ -35,7 +35,7 @@ namespace SmartFanControl
             List<IHardwareDevice> hardwareDevices = FindHardwareDevices();
             _hardwareDevices = new ConcurrentDictionary<string, IHardwareDevice>(hardwareDevices.Select(h => new KeyValuePair<string, IHardwareDevice>(h.Id, h)));
 
-            List<IDeviceConfig> configs = _notifier.GetDeviceConfigs();
+            List<IDeviceConfig> configs = _notifier.GetDeviceConfigs().OrderBy(config => config.Type).ToList();
             foreach (IDeviceConfig config in configs)
             {
                 IDevice device = CreateDeviceFromConfig(config);

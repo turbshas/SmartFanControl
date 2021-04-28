@@ -14,4 +14,10 @@
     <ProjectReference Include="..\LibreHardwareMonitorLib\LibreHardwareMonitorLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="SmartFanControlConfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

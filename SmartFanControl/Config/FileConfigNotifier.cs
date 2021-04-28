@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,8 +19,8 @@ namespace SmartFanControl.Config
         public FileConfigNotifier()
         {
             _lock = new object();
-            string config_file = File.ReadAllText(CONFIG_FILE_NAME);
-            _config = JsonConvert.DeserializeObject<Config>(config_file);
+
+            _config = InitializeConfig();
 
             if (_config == null)
             {
@@ -32,6 +33,37 @@ namespace SmartFanControl.Config
         }
 
         public event EventHandler<ConfigChangedEventArgs> ConfigChanged;
+
+        private Config InitializeConfig()
+        {
+            if (!File.Exists(CONFIG_FILE_NAME))
+            {
+                return null;
+            }
+
+            string config_file = File.ReadAllText(CONFIG_FILE_NAME);
+            JToken configToken = JToken.Parse(config_file);
+            if (configToken == null || configToken["DeviceConfigs"] == null)
+            {
+                return null;
+            }
+
+            Dictionary<string, IDeviceConfig> parsedConfigs = new Dictionary<string, IDeviceConfig>();
+            JToken deviceConfigs = configToken["DeviceConfigs"];
+            foreach (var child in deviceConfigs.Children().Children().ToList())
+            {
+                var childType = child["Type"].ToObject<DeviceType>();
+                var childId = child["Id"].ToObject<string>();
+                switch (childType)
+                {
+                    case DeviceType.Fan: parsedConfigs.Add(childId, child.ToObject<FanConfig>()); break;
+                    case DeviceType.TemperatureSensor: parsedConfigs.Add(childId, child.ToObject<TemperatureSensorConfig>()); break;
+                    default: break;
+                }
+            }
+
+            return new Config { DeviceConfigs = parsedConfigs };
+        }
 
         public IDeviceConfig GetConfig(string id)
         {

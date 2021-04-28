@@ -50,13 +50,13 @@ namespace SmartFanControl.Hardware
             }
 
             byte bytePercent;
-            if (percent > byte.MaxValue)
+            if (percent > 100)
             {
-                bytePercent = byte.MaxValue;
+                bytePercent = 100;
             }
-            else if (percent < byte.MinValue)
+            else if (percent < 0)
             {
-                bytePercent = byte.MinValue;
+                bytePercent = 0;
             }
             else
             {
