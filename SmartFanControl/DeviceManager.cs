@@ -21,6 +21,7 @@ namespace SmartFanControl
         public static DeviceManager Instance { get => _instance; }
 
         private readonly IConfigNotifier _notifier;
+        private readonly HardwareDiscoverer _hardware;
         private readonly ConcurrentDictionary<string, IHardwareDevice> _hardwareDevices;
         private readonly ConcurrentDictionary<string, List<string>> _hardwareMappings;
         private readonly ConcurrentDictionary<string, IDevice> _devices;
@@ -32,7 +33,8 @@ namespace SmartFanControl
             _devices = new ConcurrentDictionary<string, IDevice>();
             _hardwareMappings = new ConcurrentDictionary<string, List<string>>();
 
-            List<IHardwareDevice> hardwareDevices = FindHardwareDevices();
+            _hardware = new HardwareDiscoverer();
+            List<IHardwareDevice> hardwareDevices = _hardware.GetHardwareDevices();
             _hardwareDevices = new ConcurrentDictionary<string, IHardwareDevice>(hardwareDevices.Select(h => new KeyValuePair<string, IHardwareDevice>(h.Id, h)));
 
             List<IDeviceConfig> configs = _notifier.GetDeviceConfigs().OrderBy(config => config.Type).ToList();
@@ -80,12 +82,6 @@ namespace SmartFanControl
             }
         }
 
-        private List<IHardwareDevice> FindHardwareDevices()
-        {
-            using HardwareDiscoverer discoverer = new HardwareDiscoverer();
-            return discoverer.GetHardwareDevices();
-        }
-
         private IDevice CreateDeviceFromConfig(IDeviceConfig config)
         {
             _hardwareDevices.TryGetValue(config.HardwareId, out IHardwareDevice hardwareDevice);
@@ -103,6 +99,7 @@ namespace SmartFanControl
             {
                 if (disposing)
                 {
+                    _hardware.Dispose();
                     _notifier.Dispose();
                 }
 

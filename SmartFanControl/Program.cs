@@ -34,6 +34,7 @@ namespace SmartFanControl
             //Monitor();
             DeviceManager.Instance.GetDevice("test_config");
             Console.ReadLine();
+            DeviceManager.Instance.Dispose();
         }
 
         static void GetRequiredHardware()

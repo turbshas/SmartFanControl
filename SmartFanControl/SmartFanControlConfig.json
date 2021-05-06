@@ -2,14 +2,14 @@
     "DeviceConfigs": {
         "test_config": {
             "Id": "test_config",
-            "HardwareId": "/lpc/nct6795d/fancontrol/0",
+            "HardwareId": "/lpc/nct6795d/fancontrol/1",
             "Type": "Fan",
             "TemperatureSensorId": "test_temp_sensor_config",
             "TargetTemperature": 50.0,
             "MinFanSpeedPercent": 20,
-            "MaxFanSpeedPercent": 60,
+            "MaxFanSpeedPercent": 85,
             "FanSpeedStepDelay": "00:00:00.500",
-            "FanSpeedStepAmount": 2,
+            "FanSpeedStepAmount": 1,
             "Sensitivity": 1.0
         },
         "test_temp_sensor_config": {

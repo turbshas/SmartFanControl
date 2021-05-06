@@ -29,6 +29,7 @@ namespace SmartFanControl.Hardware
                 return 0;
             }
 
+            _superIoDevice.Update();
             return (int)_superIoDevice.SuperIO.Fans[_index];
         }
 
@@ -39,6 +40,7 @@ namespace SmartFanControl.Hardware
                 return 0;
             }
 
+            _superIoDevice.Update();
             return (int)_superIoDevice.SuperIO.Controls[_index];
         }
 
@@ -49,20 +51,22 @@ namespace SmartFanControl.Hardware
                 return;
             }
 
-            byte bytePercent;
             if (percent > 100)
             {
-                bytePercent = 100;
+                percent = 100;
             }
             else if (percent < 0)
             {
-                bytePercent = 0;
+                percent = 0;
             }
-            else
-            {
-                bytePercent = (byte)percent;
-            }
-            _superIoDevice.SuperIO.SetControl(_index, bytePercent);
+
+            int DIVISOR_MIN = 1; // Corresponds with 100%
+            int DIVISOR_MAX = 128; // Corresponds with 0%
+            int scaledPercent = (int)Math.Round(percent * 128.0 / 100.0);
+            int requestedDivisor = DIVISOR_MAX - scaledPercent - 1;
+            int testDiv = scaledPercent - 1;
+            Console.WriteLine($"Setting divisor to {testDiv}");
+            _superIoDevice.SuperIO.SetControl(_index, (byte)(testDiv | (0 << 7)));
         }
     }
 }

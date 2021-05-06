@@ -19,6 +19,13 @@ namespace SmartFanControl.Hardware
 
         public DeviceType Type { get => DeviceType.TemperatureSensor; }
 
-        public float? Value { get => _tempSensor.Value; }
+        public float? Value
+        {
+            get
+            {
+                _tempSensor.Hardware.Update();
+                return _tempSensor.Value;
+            }
+        }
     }
 }

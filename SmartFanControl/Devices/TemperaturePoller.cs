@@ -26,7 +26,7 @@ namespace SmartFanControl.Devices
             notifier.ConfigChanged += OnConfigChanged;
             _timer = new Timer(OnTimerTick);
             _timer.Change(_config.PollingRate, _config.PollingRate);
-            _tempSmoother = new TemperatureSmoother();
+            _tempSmoother = new TemperatureSmoother(tempSensor.Value ?? 0.0f);
         }
 
         public string Id { get => _config.Id; }

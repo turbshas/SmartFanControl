@@ -189,7 +189,7 @@ namespace SmartFanControl.Devices
                 _values = new List<T>(valuesToKeep);
                 for (int i = 0; i < valuesToKeep; i++)
                 {
-                    _values[i] = initialValue;
+                    _values.Add(initialValue);
                 }
                 _listHead = 0;
             }

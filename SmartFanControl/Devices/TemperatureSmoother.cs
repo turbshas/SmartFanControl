@@ -17,6 +17,15 @@ namespace SmartFanControl.Devices
             Average = 0.0f;
         }
 
+        public TemperatureSmoother(float initialTemperature)
+            : this()
+        {
+            for (int i = 0; i < NUM_VALUES_TO_KEEP; i++)
+            {
+                AddValue(initialTemperature);
+            }
+        }
+
         public float Average { get; private set; }
 
         public void AddValue(float tempValue)

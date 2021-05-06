@@ -8,9 +8,9 @@ namespace SmartFanControl.Controllers
     class FanSpeedController
     {
         // TODO: Find good values for these
-        private const double PROPORTIONAL_CONSTANT = 0.035;
-        private const double INTEGRAL_CONSTANT = 1.0;
-        private const double DIFFERENTIAL_CONSTANT = 1.0;
+        private const double PROPORTIONAL_CONSTANT = 0.05;
+        private const double INTEGRAL_CONSTANT = 0.001;
+        private const double DIFFERENTIAL_CONSTANT = 0.5;
 
         private readonly List<IControllerComponent> _components;
 
